@@ -63,6 +63,8 @@ $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
 
+DROP TRIGGER IF EXISTS copy_weather_temperature ON weather;
+
 CREATE TRIGGER copy_weather_temperature
 BEFORE INSERT OR UPDATE OR DELETE
 ON weather
