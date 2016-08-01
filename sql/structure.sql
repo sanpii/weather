@@ -1,4 +1,4 @@
-CREATE TABLE weather (
+CREATE TABLE IF NOT EXISTS weather (
     station VARCHAR(12) NOT NULL,
     created timestamp without time zone DEFAULT now() PRIMARY KEY,
     temperature_indoor VARCHAR(12) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE weather (
     forecast VARCHAR(12) NOT NULL
 );
 
-CREATE TABLE temperature (
+CREATE TABLE IF NOT EXISTS temperature (
     created TIMESTAMP WITHOUT TIME ZONE DEFAULT now(),
     room_id INTEGER NOT NULL REFERENCES room,
     temperature NUMERIC NOT NULL,
