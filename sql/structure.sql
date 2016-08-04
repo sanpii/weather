@@ -1,19 +1,19 @@
 CREATE TABLE IF NOT EXISTS weather (
     station VARCHAR(12) NOT NULL,
-    created timestamp without time zone DEFAULT now() PRIMARY KEY,
+    created TIMESTAMP WITHOUT TIME ZONE DEFAULT now() PRIMARY KEY,
     temperature_indoor VARCHAR(12) NOT NULL,
     temperature_outdoor VARCHAR(12) NOT NULL,
     dewpoint VARCHAR(12) NOT NULL,
     humidity_indoor VARCHAR(12) NOT NULL,
     humidity_outdoor VARCHAR(12) NOT NULL,
-    wind_all VARCHAR(12) NOT NULL,
-    winddir VARCHAR(12) NOT NULL,
-    directions VARCHAR(12) NOT NULL,
-    windchill VARCHAR(12) NOT NULL,
+    wind_speed VARCHAR(12) NOT NULL,
+    wind_dir VARCHAR(12) NOT NULL,
+    wind_direction VARCHAR(12) NOT NULL,
+    wind_chill VARCHAR(12) NOT NULL,
     rain_1h VARCHAR(12) NOT NULL,
     rain_24h VARCHAR(12) NOT NULL,
     rain_total VARCHAR(12) NOT NULL,
-    rel_pressure VARCHAR(12) NOT NULL,
+    pressure VARCHAR(12) NOT NULL,
     tendency VARCHAR(12) NOT NULL,
     forecast VARCHAR(12) NOT NULL
 );
@@ -25,9 +25,9 @@ CREATE TABLE IF NOT EXISTS room (
 
 CREATE TABLE IF NOT EXISTS temperature (
     created TIMESTAMP WITHOUT TIME ZONE DEFAULT now(),
-    room_id INTEGER NOT NULL REFERENCES room,
+    room_id INTEGER REFERENCES room(room_id),
     temperature NUMERIC NOT NULL,
-    PRIMARY KEY(created, room_id)
+    PRIMARY KEY (created, room_id)
 );
 
 CREATE OR REPLACE FUNCTION copy_weather_temperature()
