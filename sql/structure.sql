@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS weather (
     station VARCHAR(12) NOT NULL,
-    created TIMESTAMP WITHOUT TIME ZONE DEFAULT now() PRIMARY KEY,
+    created TIMESTAMP WITH TIME ZONE DEFAULT now(),
     temperature_indoor VARCHAR(12) NOT NULL,
     temperature_outdoor VARCHAR(12) NOT NULL,
     dewpoint VARCHAR(12) NOT NULL,
@@ -18,17 +18,21 @@ CREATE TABLE IF NOT EXISTS weather (
     forecast VARCHAR(12) NOT NULL
 );
 
+CREATE INDEX IF NOT EXISTS weather_created_index ON weather (created DESC);
+
 CREATE TABLE IF NOT EXISTS room (
     room_id SERIAL PRIMARY KEY,
     label CHARACTER VARYING NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS temperature (
-    created TIMESTAMP WITHOUT TIME ZONE DEFAULT now(),
+    created TIMESTAMP WITH TIME ZONE DEFAULT now(),
     room_id INTEGER REFERENCES room(room_id),
     temperature NUMERIC NOT NULL,
     PRIMARY KEY (created, room_id)
 );
+
+CREATE INDEX IF NOT EXISTS temperature_created_index ON weather (created DESC);
 
 CREATE OR REPLACE FUNCTION copy_weather_temperature()
     RETURNS trigger AS
