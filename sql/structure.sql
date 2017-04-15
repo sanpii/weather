@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS weather (
     station VARCHAR(12) NOT NULL,
     created TIMESTAMP WITH TIME ZONE DEFAULT now(),
     temperature_indoor NUMERIC NOT NULL,
-    temperature_outdoor NUMERIC NOT NULL,
+    temperature_outdoor NUMERIC NOT NULL CHECK(temperature_outdoor < 80),
     dewpoint NUMERIC NOT NULL,
     humidity_indoor INTEGER NOT NULL,
     humidity_outdoor INTEGER NOT NULL,
